@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+
+import subprocess
+
+p = subprocess.Popen(['ssh <remote_server> /script/reboot'], shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+output, err = p.communicate('yes\n')
+
+print(output)

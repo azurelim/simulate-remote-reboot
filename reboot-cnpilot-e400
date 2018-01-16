@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+# to reboot Cambium Networks cnPilot E400
+
+import pexpect
+
+list_to_reboot = [
+   # ip, port, username, password
+   ('<ip_address>', '<port>', '<username>', '<password>'),
+]
+
+for ip, username, password in list_to_reboot:
+   child = pexpect.spawn('ssh %s@%s -p %s reload' % (username, ip, port))
+   child.expect(username + '@' + ip + "'s password:")
+   child.sendline(password)
+
+   try:
+       while not child.expect(r'.+', timeout=2):
+           continue
+   except pexpect.exceptions.TIMEOUT:
+       pass
+
+   child.send('y\n')
